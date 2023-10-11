@@ -484,6 +484,7 @@ def _transcribe_timestamped_efficient(
             assert start_token >= tokenizer.timestamp_begin
             # If Whisper prediction of the end is obviously wrong, we predict it again (constrained)
             if end_token <= start_token:
+                print("end: "+end_token+" start: "+start_token")
                 new_end_token = last_logprobs[start_token+1:].argmax() + start_token + 1
                 tokens[-1] = new_end_token.item()
                 if debug:
