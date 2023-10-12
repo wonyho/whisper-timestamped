@@ -929,7 +929,9 @@ def _transcribe_timestamped_efficient(
                 timestamped_word["confidence"] = round_confidence(word_logprobs.mean().exp().item() if len(word_logprobs) else 0.0)
 
             if i_end not in [len(logprobs), len(logprobs)-1]:
-                logger.warning(f"Got inconsistent lol length for segment {i} ({len(logprobs)} != {i_end}). Some words have been ignored.")
+                #logger.warning(f"Got inconsistent lol length for segment {i} ({len(logprobs)} != {i_end}). Some words have been ignored.")
+                print(f"Got inconsistent lol length for segment {i} ({len(logprobs)} != {i_end}). Some words have been ignored.")
+            if not include_punctuation_in_confidence:   
             if not include_punctuation_in_confidence:   
                 logprobs_nopunc = torch.cat(logprobs_nopunc)
                 segment["confidence"] = round_confidence(logprobs_nopunc.mean().exp().item())
